@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="\P1\bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <script src="\P1\bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="\P1\bootstrap-icons-1.11.3\font\bootstrap-icons.css">
+    <style>
+        body {
+            background-image: url(bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        form {
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            box-shadow: 5px 5px 13px 5px gray;
+        }
+
+        label,
+        h3 {
+            text-shadow: 4px 4px 2px gray;
+        }
+
+        input {
+            box-shadow: 5px 5px 3px 1px gray;
+        }
+
+        #lform,
+        #fform,
+        #rform, #r2{
+            display: none;
+        }
+        #adlog, #regis, #forg{
+            visibility: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        @keyframes ani {
+            0%{
+                left: -20px;
+            }
+            100%{
+                left: 0px;
+            }
+        }
+
+        .box{
+            box-shadow: 2px 2px 15px 5px gray;
+            border-radius: 40px;
+            backdrop-filter: blur(7px);
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <div id="r1" class="row justify-content-center align-items-center" style="height: 100vh;">
+
+            <div class="container-fluid">
+                <div class="row justify-content-center align-content-center">
+                    <div class="box col-9 col-lg-7 justify-content-center align-content-center">
+                        <div class="d-flex align-items-center p-1 justify-content-around">
+                        <span class="bi bi-person-circle fs-3" style="cursor: pointer; color: black;"
+                            onmouseover="admin()" onclick="back()"></span>
+                        <p class="m-0 ms-1" id="adlog" onclick="back()">Admin Login</p>
+                        
+                        <span class="bi bi-r-circle fs-3 ms-2" style="cursor: pointer; color: black;"
+                            onmouseover="register()" onclick="registerb()"></span>
+                        <p class="m-0 ms-1" id="regis" onclick="registerb()">Register Account</p>
+                        
+                        <span class="bi bi-exclamation-circle fs-3 ms-2" style="cursor: pointer; color: black;" onmouseover="forget()" onclick="forgetb()"></span>
+                        <p class="m-0 ms-1" id="forg" onclick="forgetb()">Forget Password</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center" id="r2" style="height: 100vh;">
+            <div class="col-10 col-md-7 col-lg-4">
+
+                <form class="px-5 pt-2 pb-5" action="login.php" method="post" id="lform">
+                    <span class="" style="float: right; cursor: pointer;" onclick="clic()">X</span>
+                    <h3 class="my-3 mx-5 text-center">Login Form</h3>
+
+                    <label for="" class="form-label fs-5">Username</label>
+                    <input type="text" name="lemail" class="form-control  ps-3" placeholder="Username" required>
+                    <label for="" class="form-label fs-5">Password</label>
+                    <input type="password" name="lpass" class="form-control ps-3" name="" id="" placeholder="*********" required />
+                    <label for="" class="form-label fs-5">Securty Code</label>
+                    <input type="text" maxlength="4" class="form-control ps-3" name="lscode" id="" placeholder="1234" required/>
+                    <br><br>
+                    <input class="btn btn-outline-success me-3 px-5" type="submit" name="save" value="Login"
+                        style="transition: all 1s;">
+                    <input class="btn btn-outline-danger" type="button" value="Forget Password"
+                        style="transition: all 1s;" onclick="forgetb()">
+
+                </form>
+
+
+                <form class="px-5 pt-2 pb-5" action="forget.php" method="post" id="fform">
+                    <span class="" style="float: right; cursor: pointer;" onclick="clic()">X</span>
+                    <h3 class="my-3 text-center">Forget Your Password</h3>
+
+                    <label for="" class="form-label fs-5">Username</label>
+                    <input type="text" name="fuser" class="form-control  ps-3" placeholder="Username" required>
+                    <label for="" class="form-label fs-5">New Password</label>
+                    <input type="password" name="fnpass" class="form-control ps-3" name="" id="" placeholder="*********" required/>
+                    <label for="" class="form-label fs-5">Confirm New Password</label>
+                    <input type="password" name="fcpass" class="form-control ps-3" id="" placeholder="*********" required/>
+                    <label for="" class="form-label fs-5">Securty Code</label>
+                    <input type="text" maxlength="4" class="form-control ps-3" name="fscode" id="" placeholder="1234" required/>
+                    <br><br>
+                    <input class="btn btn-outline-success me-3" name="fbtn" type="submit" value="Change Password"
+                        style="transition: all 1s;">
+                    <input class="btn btn-outline-danger me-3 px-5" type="button" value="Log-In" onclick="back()"
+                        style="transition: all 1s;">
+
+
+
+                </form>
+
+                <form class="px-5 pt-2 pb-5" action="registeration.php" method="post" id="rform">
+                    <span class="" style="float: right; cursor: pointer;" onclick="clic()">X</span>
+                    <h3 class="my-3 text-center">Registeration Form</h3>
+
+                    <label for="" class="form-label fs-5">Username</label>
+                    <input type="text" class="form-control  ps-3" name="u_name" placeholder="Username" required>
+                    <label for="num" class="form-label fs-5">Phone Number</label>
+                    <input type="text" class="form-control  ps-3" id="num" maxlength="10" name="u_number"
+                        placeholder="+91_________" oninput="pres()" required>
+                    <label for="" class="form-label fs-5">E-Mail</label>
+                    <input type="email" class="form-control ps-3" name="u_mail" id=""
+                        placeholder="demo1234@gmail.com" required/>
+                    <label for="" class="form-label fs-5">Password</label>
+                    <input type="password" class="form-control ps-3" name="u_password" id="" placeholder="*********" required/>
+                    <label for="" class="form-label fs-5">Confirm Password</label>
+                    <input type="password" class="form-control ps-3" name="uc_password" id="" placeholder="*********" required/>
+                    <br><br>
+                    <input class="btn btn-outline-success me-3" type="submit" name="save" value="Submit"
+                        style="transition: all 1s;">
+                    <input class="btn btn-outline-danger" type="button" value="Go To Log-In" onclick="back()"
+                        style="transition: all 1s;">
+
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function clic() {
+        document.getElementById('r1').style.display = 'flex';
+        document.getElementById('r2').style.display = 'none';
+        document.getElementById('fform').style.display = 'none';
+        document.getElementById('lform').style.display = 'none';
+        document.getElementById('rform').style.display = 'none';
+        // document.getElementById('rform').style.transition = 'all 2s';
+    }
+
+    function forgetb() {
+        document.getElementById('r1').style.display = 'none';
+        document.getElementById('r2').style.display = 'flex';
+        document.getElementById('fform').style.display = 'inline-block';
+        document.getElementById('lform').style.display = 'none';
+        document.getElementById('rform').style.display = 'none';
+    }
+
+
+    function back() {
+        document.getElementById('r1').style.display = 'none';
+        document.getElementById('r2').style.display = 'flex';
+        document.getElementById('fform').style.display = 'none';
+        document.getElementById('rform').style.display = 'none';
+        document.getElementById('lform').style.display = 'inline-block';
+    }
+
+    function registerb() {
+        document.getElementById('r1').style.display = 'none';
+        document.getElementById('r2').style.display = 'flex';
+        document.getElementById('fform').style.display = 'none';
+        document.getElementById('rform').style.display = 'revert';
+        document.getElementById('lform').style.display = 'none';
+    }
+
+    function pres() {
+        let data = document.getElementById('num');
+        data.value = data.value.replace(/[^0-9]/g, '');
+        // console.log(data);
+    }
+
+    function admin() {
+        document.getElementById('adlog').style.animation = 'ani 1s linear 1';
+        document.getElementById('adlog').style.visibility = 'visible';
+    }
+
+    function register() {
+        document.getElementById('regis').style.animation = 'ani 1s linear 1';
+        document.getElementById('regis').style.visibility = 'visible';
+    }
+
+    function forget() {
+        document.getElementById('forg').style.animation = 'ani 1s linear 1';
+        document.getElementById('forg').style.visibility = 'visible';
+    }
+</script>
